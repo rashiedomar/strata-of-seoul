@@ -1,114 +1,60 @@
 # The Strata of Seoul
 
-`The Strata of Seoul` is a map-first experimental visualization of Seoul's architectural age structure.  
-It treats building approval eras as stacked urban layers rather than as a single flat city surface.
+`The Strata of Seoul` is a MapLibre-based web app that renders Seoul as stacked building-age layers instead of a flat plan view.
 
-The current version is an artistic-analytical prototype:
-- **Bedrock**: early building stock
-- **Mid-strata**: expansion-era stock
-- **Upper shelf**: recent vertical growth
-- **Phantoms**: records without registered approval age
+Live site:
 
-Instead of reading the city only as 2D footprint geometry, the app renders Seoul as a vertical cross-section of time.
+```text
+https://rashiedomar.github.io/strata-of-seoul/
+```
 
-## Concept
+## What the app does
 
-The main visual move is simple:
+- visualizes four age bands as separate vertical strata
+- lets users isolate a single era or view the full stack
+- uses hover to inspect the active footprint
+- summarizes the visible building mix for the hovered neighborhood
+- exposes a vertical spread control to change layer separation
 
-1. split buildings into historical age buckets
-2. place each bucket on a different vertical band
-3. keep the original building extrusion height within that band
-4. let the user isolate eras or read them together as stacked urban history
+## Stack
 
-The result is not intended as a literal physical model of Seoul. It is an interpretive visualization of:
-- architectural age
-- urban accumulation
-- neighborhood-level temporal layering
+- `Vite`
+- `MapLibre GL JS`
+- plain `HTML`, `CSS`, and `JavaScript`
 
-## Current interaction
+## Data
 
-- **Era Focus**: filter the scene to one historical layer or show all strata
-- **Vertical spread**: increase or decrease the separation between eras
-- **Hover slice**: hover a building to inspect:
-  - neighborhood
-  - era bucket
-  - approval date
-  - address
-  - building height proxy
-- **Neighborhood cross-section**: counts how many currently visible buildings in the same `dongName` belong to each era layer
+The runtime app uses public pre-generated Seoul building-age GeoJSON tiles derived from the reference Seoul Building Explorer project:
 
-## Data sources
+- project: https://hanbyul-here.github.io/seoul-building-explorer/
+- repo: https://github.com/hanbyul-here/seoul-building-explorer
 
-### Primary rendered data
+Tile groups used by this app:
 
-This prototype currently uses the public age-bucket building tiles from the reference Seoul Building Explorer project:
+- `final-gz-2345`
+- `final-gz-678`
+- `final-gz-901`
+- `final-buildings-null`
 
-- Project: https://hanbyul-here.github.io/seoul-building-explorer/
-- Repo: https://github.com/hanbyul-here/seoul-building-explorer
+Expected feature properties include:
 
-The original project is based on NSDI building records and pre-generated static GeoJSON tiles.
-
-Rendered tile sources used here:
-- `https://s3.amazonaws.com/odd-tiles/final-gz-2345/{z}/{x}/{y}.geojson`
-- `https://s3.amazonaws.com/odd-tiles/final-gz-678/{z}/{x}/{y}.geojson`
-- `https://s3.amazonaws.com/odd-tiles/final-gz-901/{z}/{x}/{y}.geojson`
-- `https://s3.amazonaws.com/odd-tiles/final-buildings-null/{z}/{x}/{y}.geojson`
-
-Observed per-feature properties include:
 - `h`
 - `year`
 - `address`
 - `dongName`
 
-### Local data pathway
+This repository is intentionally the deployable frontend only. It does not include raw data exports or preprocessing workflows.
 
-The working project also includes a separate locally downloaded Seoul building-footprint dataset during development.
+## Local development
 
-That dataset is not the primary render source for the current age-stack scene. It remains relevant for later versions that may focus on:
-- present-day geometry
-- urban-form analysis
-- or a future UrbanCDNet-linked change layer
-
-## Why this version exists
-
-This is not a thesis figure.  
-It is a portfolio-oriented visualization experiment built around a strong spatial metaphor.
-
-The goal of this version is to establish:
-- a visual language
-- a cleaner map-first interaction model
-- a recognizable Seoul-focused concept
-
-before introducing more complex layers such as:
-- change predictions
-- before/after imagery
-- or building-level model outputs
-
-## Technical notes
-
-The current app is built with:
-- `Vite`
-- `MapLibre GL JS`
-- remote static GeoJSON tile fetches
-
-The browser app loads only the currently needed visible age tiles and merges them client-side by bucket.
-
-## Run locally
-
-From `little_fan_project/`:
+Install dependencies and start the dev server:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open:
-
-```text
-http://localhost:4173/
-```
-
-Production build:
+Create a production build:
 
 ```bash
 npm run build
@@ -116,16 +62,24 @@ npm run build
 
 ## Deployment
 
-GitHub Pages target:
+GitHub Pages deploys from `.github/workflows/deploy-pages.yml`.
 
-```text
-https://rashiedomar.github.io/strata-of-seoul/
-```
+Key deployment detail:
 
-## Files
+- `vite.config.js` sets `base: "/strata-of-seoul/"`
 
-- [index.html](./index.html): app shell
-- [src/main.js](./src/main.js): rendering, tile loading, hover logic
-- [src/style.css](./src/style.css): visual system
-- [REFERENCE_APP_AUDIT.md](./REFERENCE_APP_AUDIT.md): reverse-engineering notes on the source project
-- [DATASET_AUDIT.md](./DATASET_AUDIT.md): local Seoul building-footprint source notes
+## Repo layout
+
+- `index.html`: app shell
+- `src/main.js`: map setup, tile loading, state, and hover behavior
+- `src/style.css`: full visual styling
+- `vite.config.js`: GitHub Pages base path
+- `.github/workflows/deploy-pages.yml`: Pages build and deploy workflow
+
+## Follow-up
+
+If someone wants to continue this project, the main extension points are:
+
+- swap the public tile source for a maintained dataset pipeline
+- add richer building metadata or temporal filters
+- tune performance by replacing client-side GeoJSON loading with a tiled or PMTiles workflow
