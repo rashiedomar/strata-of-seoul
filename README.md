@@ -114,6 +114,14 @@ Production build:
 npm run build
 ```
 
+## Deployment
+
+GitHub Pages target:
+
+```text
+https://rashiedomar.github.io/strata-of-seoul/
+```
+
 ## Files
 
 - [index.html](./index.html): app shell
