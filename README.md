@@ -60,13 +60,11 @@ Observed per-feature properties include:
 - `address`
 - `dongName`
 
-### Local data already prepared in this repo
+### Local data pathway
 
-This project directory also contains a separate locally downloaded Seoul building-footprint dataset:
+The working project also includes a separate locally downloaded Seoul building-footprint dataset during development.
 
-- [data/raw/seoul_buildings_v2_4326.parquet](./data/raw/seoul_buildings_v2_4326.parquet)
-
-That dataset is not the primary render source for the current age-stack scene. It remains available for later versions that may focus on:
+That dataset is not the primary render source for the current age-stack scene. It remains relevant for later versions that may focus on:
 - present-day geometry
 - urban-form analysis
 - or a future UrbanCDNet-linked change layer
