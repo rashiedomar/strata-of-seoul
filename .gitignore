@@ -1,0 +1,19 @@
+node_modules/
+dist/
+
+# local raw data and download artifacts
+data/raw/
+public/data/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

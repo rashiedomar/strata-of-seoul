@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Strata of Seoul</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="map"></div>
+
+      <div id="needle" class="needle" hidden aria-hidden="true">
+        <div class="needle-core"></div>
+        <div class="needle-cap"></div>
+      </div>
+
+      <div id="loading-badge" class="loading-badge" hidden>Loading visible strata…</div>
+
+      <header class="title-card">
+        <p class="eyebrow">Seoul / architectural age explorer</p>
+        <h1>The Strata of Seoul</h1>
+        <p class="subtitle">
+          Seoul is rendered as a stacked urban cross-section: post-war foundations,
+          mid-strata growth, upper-era expansion, and unregistered phantoms.
+        </p>
+      </header>
+
+      <aside class="control-dock" aria-label="Era controls">
+        <div class="control-block">
+          <div class="control-label">Era Focus</div>
+          <div class="chip-row chip-row--stack">
+            <button class="chip-btn is-active" data-focus="all">All strata</button>
+            <button class="chip-btn" data-focus="bedrock">Bedrock · 1920s–1950s</button>
+            <button class="chip-btn" data-focus="mid_a">Mid-strata · 1960s–1980s</button>
+            <button class="chip-btn" data-focus="mid_b">Upper shelf · 1990s–2010s</button>
+            <button class="chip-btn" data-focus="phantoms">Phantoms · unregistered</button>
+          </div>
+        </div>
+
+        <div class="legend-block">
+          <div class="legend-row">
+            <span class="legend-swatch legend-swatch--bedrock"></span>
+            <div>
+              <strong>Bedrock</strong>
+              <span>Foundational building stock</span>
+            </div>
+          </div>
+          <div class="legend-row">
+            <span class="legend-swatch legend-swatch--mid-a"></span>
+            <div>
+              <strong>Mid-strata</strong>
+              <span>Industrial and expansion-era layers</span>
+            </div>
+          </div>
+          <div class="legend-row">
+            <span class="legend-swatch legend-swatch--mid-b"></span>
+            <div>
+              <strong>Upper shelf</strong>
+              <span>Recent vertical growth</span>
+            </div>
+          </div>
+          <div class="legend-row">
+            <span class="legend-swatch legend-swatch--phantoms"></span>
+            <div>
+              <strong>Phantoms</strong>
+              <span>Records without registered approval age</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <aside class="info-card" aria-label="Hovered building information">
+        <p class="eyebrow">Hover slice</p>
+        <h2 id="info-title">Move over a building</h2>
+        <p class="info-subtitle" id="info-subtitle">
+          A vertical needle marks the hovered footprint and reveals its neighborhood stack.
+        </p>
+
+        <dl class="info-grid">
+          <div>
+            <dt>Neighborhood</dt>
+            <dd id="info-dong">—</dd>
+          </div>
+          <div>
+            <dt>Era</dt>
+            <dd id="info-era">—</dd>
+          </div>
+          <div>
+            <dt>Approval</dt>
+            <dd id="info-year">—</dd>
+          </div>
+          <div>
+            <dt>Pressure</dt>
+            <dd id="info-height">—</dd>
+          </div>
+          <div class="full">
+            <dt>Address</dt>
+            <dd id="info-address">—</dd>
+          </div>
+        </dl>
+
+        <div class="stack-card">
+          <div class="stack-card__header">
+            <span>Neighborhood cross-section</span>
+            <strong id="stack-total">—</strong>
+          </div>
+
+          <div class="stack-row">
+            <span class="stack-label">Bedrock</span>
+            <div class="stack-bar"><span id="stack-bedrock-bar"></span></div>
+            <strong id="stack-bedrock-count">—</strong>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Mid-strata</span>
+            <div class="stack-bar"><span id="stack-mid-a-bar"></span></div>
+            <strong id="stack-mid-a-count">—</strong>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Upper shelf</span>
+            <div class="stack-bar"><span id="stack-mid-b-bar"></span></div>
+            <strong id="stack-mid-b-count">—</strong>
+          </div>
+          <div class="stack-row">
+            <span class="stack-label">Phantoms</span>
+            <div class="stack-bar"><span id="stack-phantoms-bar"></span></div>
+            <strong id="stack-phantoms-count">—</strong>
+          </div>
+        </div>
+      </aside>
+
+      <section class="spread-panel">
+        <label class="spread-label" for="spread-slider">
+          Vertical spread
+          <strong id="spread-value">120 m</strong>
+        </label>
+        <input id="spread-slider" type="range" min="70" max="220" step="10" value="120" />
+      </section>
+
+      <div id="tooltip" class="tooltip" hidden></div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
