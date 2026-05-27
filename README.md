@@ -2,11 +2,11 @@
 
 `The Strata of Seoul` is a MapLibre-based web app that renders Seoul as stacked building-age layers instead of a flat plan view.
 
-Live site:
-
-```text
-https://rashiedomar.github.io/strata-of-seoul/
-```
+<p>
+  <a href="https://rashiedomar.github.io/strata-of-seoul/">
+    <img src="https://img.shields.io/badge/See%20the%20live%20page-here-0f172a?style=for-the-badge&logo=githubpages&logoColor=white" alt="See the live page here">
+  </a>
+</p>
 
 ## What the app does
 
@@ -24,10 +24,7 @@ https://rashiedomar.github.io/strata-of-seoul/
 
 ## Data
 
-The runtime app uses public pre-generated Seoul building-age GeoJSON tiles derived from the reference Seoul Building Explorer project:
-
-- project: https://hanbyul-here.github.io/seoul-building-explorer/
-- repo: https://github.com/hanbyul-here/seoul-building-explorer
+The runtime app uses public pre-generated Seoul building-age GeoJSON tiles and organizes them into the stacked-era view used by this project.
 
 Tile groups used by this app:
 
